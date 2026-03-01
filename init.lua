@@ -549,7 +549,18 @@ local function Decompile(bytecode, options)
 					local opCodeInfo = LuauOpCode[Luau:INSN_OP(instruction)]
 					if not opCodeInfo then
 						-- this is serious!
-						reportProtoIssue(proto, `invalid instruction at index "{index}"!`)
+						warn(string.format(
+							"Invalid instruction detected | index=%d raw=%d opcode=%d",
+							index,
+							instruction,
+							opcode
+						))
+					
+						reportProtoIssue(
+							proto,
+							string.format("Invalid instruction at index %d (opcode %d)", index, opcode)
+						)
+
 						continue
 					end
 
@@ -1941,3 +1952,4 @@ _ENV.decompile = function(script, x, ...)
 		return output
 	end
 end
+
