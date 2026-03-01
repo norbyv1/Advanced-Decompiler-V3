@@ -553,12 +553,12 @@ local function Decompile(bytecode, options)
 							"Invalid instruction detected | index=%d raw=%d opcode=%d",
 							index,
 							instruction,
-							opcode
+							Luau:INSN_OP(instruction)
 						))
 					
 						reportProtoIssue(
 							proto,
-							string.format("Invalid instruction at index %d (opcode %d)", index, opcode)
+							string.format("Invalid instruction at index")
 						)
 
 						continue
@@ -1952,4 +1952,5 @@ _ENV.decompile = function(script, x, ...)
 		return output
 	end
 end
+
 
